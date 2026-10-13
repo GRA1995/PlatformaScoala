@@ -6,44 +6,42 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    // Emailurile administratorilor (pot șterge orice mesaj).
-    // Se completează cu adresele reale când creăm conturile.
     function isAdmin() {
       return signedIn() && request.auth.token.email in [
         'grama.razvan95@gmail.com'
       ];
     }
 
-    // Profilurile utilizatorilor (nume afișat)
+    // Profilurile utilizatorilor (nume afișat + poză)
     match /users/{uid} {
       allow read: if signedIn();
       allow create, update: if signedIn() && request.auth.uid == uid;
       allow delete: if false;
     }
 
-    // Mesajele din chat-ul comun
-    match /messages/{id} {
-      allow read: if signedIn();
-      // poți crea doar mesaje în numele tău
-      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
-      // nu se editează mesajele
-      allow update: if false;
-      // ștergi doar mesajele tale; administratorii pot șterge orice
-      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
-    }
-
-    // Prezența (cine e online) — fiecare își scrie doar propriul status
+    // Prezența (cine e online)
     match /presence/{uid} {
       allow read: if signedIn();
       allow write: if signedIn() && request.auth.uid == uid;
     }
 
-    // Task-uri „De făcut" — comune; oricine autentificat le vede și le bifează
+    // Task-uri „De făcut"
     match /tasks/{id} {
       allow read: if signedIn();
       allow create: if signedIn() && request.resource.data.createdBy == request.auth.uid;
       allow update: if signedIn();
       allow delete: if signedIn() && (resource.data.createdBy == request.auth.uid || isAdmin());
+    }
+
+    // Conversații: 'general' (comun) sau 'dm_...' (privat, între 2 persoane)
+    match /channels/{cid}/messages/{mid} {
+      // la General citesc toți; la privat doar membrii
+      allow read: if signedIn() && ( cid == 'general' || request.auth.uid in resource.data.members );
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && ( cid == 'general' || request.auth.uid in request.resource.data.members );
+      allow update: if false;
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
     }
   }
 }

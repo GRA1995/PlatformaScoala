@@ -5,210 +5,144 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Platforma Scoala</title>
 <style>
-  :root {
-    --bg: #0f1115;
-    --panel: #171a21;
-    --panel2: #1e222b;
-    --line: #2a2f3a;
-    --text: #eef1f6;
-    --muted: #949bab;
-    --accent: #3b82f6;
-    --accent-ink: #ffffff;
-    --danger: #ef4444;
-    --warn: #f59e0b;
-    --on: #22c55e;
-    --off: #596070;
-    --me: #234e8a;
-    --other: #222733;
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --panel3:#232834;
+    --line:#2a2f3a; --text:#eef1f6; --muted:#949bab; --faint:#6b7281;
+    --accent:#3b82f6; --me:#234e8a; --other:#222733;
+    --on:#22c55e; --off:#596070; --danger:#ef4444; --warn:#f59e0b; --badge:#3b82f6;
   }
-  * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
-  body {
-    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    background: var(--bg); color: var(--text);
-    -webkit-font-smoothing: antialiased;
-  }
-  button { font-family: inherit; cursor: pointer; }
-  input {
-    font-family: inherit; background: var(--panel2);
-    border: 1px solid var(--line); color: var(--text);
-    border-radius: 10px; padding: 12px 14px; font-size: 15px;
-    width: 100%; outline: none;
-  }
-  input:focus { border-color: var(--accent); }
-  .hidden { display: none !important; }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; margin:0; }
+  body{ font-family:-apple-system,"Segoe UI",Roboto,system-ui,sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+  button{ font-family:inherit; cursor:pointer; }
+  input,textarea{ font-family:inherit; background:var(--panel2); border:1px solid var(--line); color:var(--text); border-radius:10px; padding:12px 14px; font-size:15px; width:100%; outline:none; }
+  input:focus,textarea:focus{ border-color:var(--accent); }
+  .hidden{ display:none !important; }
 
   /* ---------- Login ---------- */
-  #login { height: 100%; display: flex; align-items: center; justify-content: center; padding: 24px; }
-  .card {
-    width: 100%; max-width: 380px; background: var(--panel);
-    border: 1px solid var(--line); border-radius: 16px; padding: 30px 26px;
-  }
-  .brand { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
-  .brand-sub { color: var(--muted); font-size: 14px; margin: 0 0 22px; }
-  .field-label { font-size: 13px; color: var(--muted); margin: 14px 0 6px; }
-  .btn {
-    background: var(--accent); color: var(--accent-ink); border: none;
-    border-radius: 10px; padding: 12px 16px; font-size: 15px; font-weight: 600;
-    width: 100%; margin-top: 20px;
-  }
-  .btn:disabled { opacity: .55; cursor: default; }
-  .msg-error { color: var(--danger); font-size: 13px; margin-top: 14px; min-height: 16px; text-align: center; }
+  #login{ height:100%; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .card{ width:100%; max-width:380px; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:30px 26px; }
+  .brand{ font-size:22px; font-weight:700; margin:0 0 4px; }
+  .brand-sub{ color:var(--muted); font-size:14px; margin:0 0 22px; }
+  .field-label{ font-size:13px; color:var(--muted); margin:14px 0 6px; }
+  .btn{ background:var(--accent); color:#fff; border:none; border-radius:10px; padding:12px 16px; font-size:15px; font-weight:600; width:100%; margin-top:20px; }
+  .btn:disabled{ opacity:.55; cursor:default; }
+  .msg-error{ color:var(--danger); font-size:13px; margin-top:14px; min-height:16px; text-align:center; }
 
   /* ---------- App ---------- */
-  #app { height: 100%; display: flex; flex-direction: column; }
-  header {
-    display: flex; align-items: center; gap: 12px; padding: 10px 18px;
-    background: var(--panel); border-bottom: 1px solid var(--line); flex: 0 0 auto;
-  }
-  header .title { font-weight: 700; font-size: 16px; }
-  header .channel { color: var(--muted); font-size: 13px; }
-  header .spacer { flex: 1; }
-  header .who { font-size: 13px; color: var(--muted); text-align: right; }
-  header .who b { color: var(--text); }
-  .badge { font-size: 11px; background: var(--accent); color: #fff; padding: 2px 7px; border-radius: 999px; margin-left: 6px; }
-  .link-btn {
-    background: transparent; border: 1px solid var(--line); color: var(--muted);
-    border-radius: 8px; padding: 7px 12px; font-size: 13px;
-  }
-  .link-btn:hover { color: var(--text); border-color: var(--muted); }
+  #app{ height:100%; display:flex; flex-direction:column; }
+  header{ display:flex; align-items:center; gap:12px; padding:9px 16px; background:var(--panel); border-bottom:1px solid var(--line); flex:0 0 auto; }
+  header .title{ font-weight:700; font-size:16px; }
+  header .spacer{ flex:1; }
+  header .who{ font-size:13px; color:var(--muted); }
+  header .who b{ color:var(--text); }
+  .badge{ font-size:11px; background:var(--accent); color:#fff; padding:2px 7px; border-radius:999px; margin-left:6px; }
+  .link-btn{ background:transparent; border:1px solid var(--line); color:var(--muted); border-radius:8px; padding:7px 12px; font-size:13px; }
+  .link-btn:hover{ color:var(--text); border-color:var(--muted); }
 
-  /* avatar */
-  .avatar {
-    border-radius: 50%; background: var(--panel2); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 600; overflow: hidden; flex: 0 0 auto; user-select: none;
-  }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  #me-avatar { width: 38px; height: 38px; cursor: pointer; border: 2px solid transparent; }
-  #me-avatar:hover { border-color: var(--accent); }
+  .avatar{ border-radius:50%; background:var(--panel2); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:600; overflow:hidden; flex:0 0 auto; user-select:none; }
+  .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+  #me-avatar{ width:36px; height:36px; cursor:pointer; border:2px solid transparent; font-size:14px; }
+  #me-avatar:hover{ border-color:var(--accent); }
 
-  #body { flex: 1; display: flex; min-height: 0; }
+  /* ---- conversații pe o linie ---- */
+  .convbar{ display:flex; align-items:center; gap:8px; padding:9px 14px; background:#141924; border-bottom:1px solid var(--line); overflow-x:auto; flex:0 0 auto; }
+  .cb-label{ flex:0 0 auto; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--faint); margin-right:2px; }
+  .cchip{ flex:0 0 auto; display:flex; align-items:center; gap:8px; background:var(--panel2); border:1px solid var(--line); border-radius:999px; padding:5px 13px 5px 6px; }
+  .cchip:hover{ border-color:var(--muted); }
+  .cchip.active{ background:var(--panel3); border-color:var(--accent); }
+  .cav{ position:relative; width:28px; height:28px; flex:0 0 auto; }
+  .cav .avatar{ width:28px; height:28px; font-size:12px; }
+  .cav .st{ position:absolute; right:-1px; bottom:-1px; width:9px; height:9px; border-radius:50%; background:var(--off); border:2px solid var(--panel2); }
+  .cchip.active .cav .st{ border-color:var(--panel3); }
+  .cav .st.on{ background:var(--on); }
+  .cchip .nm{ font-size:13px; font-weight:500; white-space:nowrap; }
+  .cchip .ub{ width:9px; height:9px; border-radius:50%; background:var(--badge); flex:0 0 auto; }
 
-  /* ----- sidebar ----- */
-  #sidebar {
-    width: 250px; flex: 0 0 auto; background: var(--panel);
-    border-right: 1px solid var(--line); overflow-y: auto;
-    display: flex; flex-direction: column;
-  }
-  .side-section { padding: 14px 0 10px; }
-  .side-section + .side-section { border-top: 1px solid var(--line); }
-  .side-title {
-    font-size: 12px; text-transform: uppercase; letter-spacing: .04em;
-    color: var(--muted); padding: 0 16px 8px; display: flex; align-items: center;
-  }
-  .side-title .add {
-    margin-left: auto; width: 22px; height: 22px; border-radius: 6px;
-    background: var(--panel2); border: 1px solid var(--line); color: var(--text);
-    font-size: 15px; line-height: 1; display: flex; align-items: center; justify-content: center;
-  }
-  .side-title .add:hover { border-color: var(--accent); }
+  #bodyrow{ flex:1; display:flex; min-height:0; }
 
-  .user-item { display: flex; align-items: center; gap: 10px; padding: 7px 16px; }
-  .avatar-wrap { position: relative; flex: 0 0 auto; }
-  .avatar-wrap .avatar { width: 34px; height: 34px; font-size: 14px; }
-  .avatar-wrap .dot {
-    position: absolute; right: -1px; bottom: -1px;
-    width: 11px; height: 11px; border-radius: 50%;
-    background: var(--off); border: 2px solid var(--panel);
-  }
-  .avatar-wrap .dot.on { background: var(--on); }
-  .user-item .u-info { min-width: 0; }
-  .user-item .u-name { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .user-item .u-status { font-size: 11px; color: var(--muted); }
-  .user-item.me .u-name { color: var(--accent); }
+  /* ---- De făcut (stânga) ---- */
+  .todo{ width:270px; flex:0 0 auto; background:var(--panel); border-right:1px solid var(--line); display:flex; flex-direction:column; min-width:0; }
+  .todo-head{ display:flex; align-items:center; gap:8px; padding:13px 15px 10px; border-bottom:1px solid var(--line); flex:0 0 auto; }
+  .todo-head .tt{ font-size:13px; font-weight:700; letter-spacing:.02em; }
+  .todo-head .cc{ font-size:11px; color:var(--muted); }
+  .todo-head .cc .ovl{ color:var(--danger); font-weight:600; }
+  .todo-head .add{ margin-left:auto; width:24px; height:24px; border-radius:7px; background:var(--panel2); border:1px solid var(--line); color:var(--text); font-size:15px; display:flex; align-items:center; justify-content:center; }
+  .todo-head .add:hover{ border-color:var(--accent); }
+  .todo-list{ overflow:auto; padding:12px; display:flex; flex-direction:column; gap:9px; }
+  .task{ background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:9px 10px; display:flex; gap:9px; align-items:flex-start; position:relative; }
+  .task.ov{ border-color:rgba(239,68,68,.5); }
+  .chk{ width:17px; height:17px; flex:0 0 auto; margin-top:1px; border-radius:5px; border:2px solid var(--muted); background:transparent; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px; }
+  .task.done .chk{ background:var(--on); border-color:var(--on); }
+  .t-body{ min-width:0; flex:1; }
+  .t-title{ font-size:13.5px; line-height:1.3; word-break:break-word; }
+  .task.done .t-title{ text-decoration:line-through; color:var(--muted); }
+  .t-meta{ font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5; }
+  .t-due.ovl{ color:var(--danger); font-weight:600; }
+  .done-badge{ display:inline-flex; align-items:center; gap:4px; font-size:10.5px; font-weight:700; color:var(--on); background:rgba(34,197,94,.14); border:1px solid rgba(34,197,94,.4); border-radius:999px; padding:2px 8px; margin-top:6px; }
+  .prog-badge{ display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:700; color:var(--warn); background:rgba(245,158,11,.13); border:1px solid rgba(245,158,11,.4); border-radius:999px; padding:2px 8px; margin-top:6px; }
+  .t-del{ background:transparent; border:none; color:var(--muted); font-size:13px; position:absolute; top:6px; right:7px; opacity:0; }
+  .task:hover .t-del{ opacity:1; }
+  .t-del:hover{ color:var(--danger); }
+  .empty-mini{ color:var(--muted); font-size:13px; padding:4px 4px; }
 
-  /* tasks */
-  #task-list { padding: 0 10px; }
-  .task {
-    background: var(--panel2); border: 1px solid var(--line); border-radius: 10px;
-    padding: 9px 10px; margin: 0 6px 8px; display: flex; gap: 9px; align-items: flex-start;
-    position: relative;
-  }
-  .task .chk {
-    width: 18px; height: 18px; flex: 0 0 auto; margin-top: 1px;
-    border-radius: 5px; border: 2px solid var(--muted); background: transparent;
-    cursor: pointer; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px;
-  }
-  .task.done .chk { background: var(--on); border-color: var(--on); }
-  .task .t-body { min-width: 0; flex: 1; }
-  .task .t-title { font-size: 14px; line-height: 1.3; word-break: break-word; }
-  .task.done .t-title { text-decoration: line-through; color: var(--muted); }
-  .task .t-meta { font-size: 11px; color: var(--muted); margin-top: 3px; }
-  .task .t-due.overdue { color: var(--danger); font-weight: 600; }
-  .task .t-del {
-    background: transparent; border: none; color: var(--muted); font-size: 13px;
-    position: absolute; top: 6px; right: 7px; opacity: 0;
-  }
-  .task:hover .t-del { opacity: 1; }
-  .task .t-del:hover { color: var(--danger); }
-  .empty-mini { color: var(--muted); font-size: 13px; padding: 2px 16px 6px; }
+  /* ---- chat ---- */
+  .chat{ flex:1; display:flex; flex-direction:column; min-width:0; }
+  .chat-head{ display:flex; align-items:center; gap:11px; padding:11px 16px; background:var(--panel); border-bottom:1px solid var(--line); flex:0 0 auto; }
+  .chat-head .avatar{ width:38px; height:38px; font-size:15px; }
+  .ch-name{ font-size:15px; font-weight:600; } .ch-sub{ font-size:12px; color:var(--muted); }
+  .ch-sub.on{ color:var(--on); }
+  #messages{ flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:11px; }
+  .row{ display:flex; gap:8px; align-items:flex-end; }
+  .row.mine{ justify-content:flex-end; }
+  .row .avatar{ width:30px; height:30px; font-size:13px; }
+  .bubble{ max-width:72%; background:var(--other); border-radius:14px; padding:9px 13px; position:relative; }
+  .row.mine .bubble{ background:var(--me); }
+  .bubble .meta{ font-size:12px; color:var(--muted); margin-bottom:3px; }
+  .bubble .meta b{ color:var(--text); }
+  .bubble .text{ font-size:15px; white-space:pre-wrap; word-break:break-word; line-height:1.35; }
+  .bubble .time{ font-size:11px; color:var(--muted); margin-top:4px; text-align:right; }
+  .file{ display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.06); border:1px solid var(--line); border-radius:10px; padding:9px 11px; margin-top:4px; }
+  .file .ico{ font-size:20px; } .file .info{ flex:1; min-width:0; }
+  .file .name{ font-size:14px; word-break:break-all; } .file .size{ font-size:12px; color:var(--muted); }
+  .file .dl{ background:var(--accent); color:#fff; border:none; border-radius:8px; padding:7px 11px; font-size:13px; font-weight:600; }
+  .del{ position:absolute; top:6px; right:8px; background:transparent; border:none; color:var(--muted); font-size:13px; opacity:0; transition:opacity .15s; }
+  .bubble:hover .del{ opacity:1; } .del:hover{ color:var(--danger); }
+  .day-sep{ text-align:center; color:var(--muted); font-size:12px; margin:6px 0; }
+  .center-note{ color:var(--muted); text-align:center; margin-top:40px; font-size:14px; }
 
-  #main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
-  #messages { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
-  .row { display: flex; gap: 8px; align-items: flex-end; }
-  .row.mine { justify-content: flex-end; }
-  .row .avatar { width: 30px; height: 30px; font-size: 13px; }
-  .bubble { max-width: 70%; background: var(--other); border-radius: 14px; padding: 9px 13px; position: relative; }
-  .row.mine .bubble { background: var(--me); }
-  .bubble .meta { font-size: 12px; color: var(--muted); margin-bottom: 3px; }
-  .bubble .meta b { color: var(--text); }
-  .bubble .text { font-size: 15px; white-space: pre-wrap; word-break: break-word; line-height: 1.35; }
-  .bubble .time { font-size: 11px; color: var(--muted); margin-top: 4px; text-align: right; }
-  .file {
-    display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.06);
-    border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; margin-top: 4px;
-  }
-  .file .ico { font-size: 20px; }
-  .file .info { flex: 1; min-width: 0; }
-  .file .name { font-size: 14px; word-break: break-all; }
-  .file .size { font-size: 12px; color: var(--muted); }
-  .file .dl { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 7px 11px; font-size: 13px; font-weight: 600; }
-  .del {
-    position: absolute; top: 6px; right: 8px; background: transparent; border: none;
-    color: var(--muted); font-size: 13px; opacity: 0; transition: opacity .15s;
-  }
-  .bubble:hover .del { opacity: 1; }
-  .del:hover { color: var(--danger); }
-  .day-sep { text-align: center; color: var(--muted); font-size: 12px; margin: 6px 0; }
+  /* ---- bara de scris (lată) ---- */
+  footer{ border-top:1px solid var(--line); background:var(--panel); padding:14px 18px; flex:0 0 auto; }
+  .attach-preview{ display:none; align-items:center; gap:10px; background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:8px 12px; margin-bottom:10px; font-size:13px; }
+  .attach-preview .x{ margin-left:auto; background:transparent; border:none; color:var(--muted); font-size:16px; }
+  .composer{ display:flex; align-items:flex-end; gap:12px; }
+  .icon-btn{ background:var(--panel2); border:1px solid var(--line); color:var(--text); border-radius:12px; width:52px; height:52px; font-size:21px; flex:0 0 auto; }
+  .icon-btn:hover{ border-color:var(--accent); }
+  #composer-text{ resize:none; min-height:52px; max-height:160px; padding:15px 16px; line-height:1.4; font-size:15.5px; border-radius:14px; }
+  .send{ background:var(--accent); color:#fff; border:none; border-radius:12px; height:52px; padding:0 26px; font-size:15px; font-weight:600; flex:0 0 auto; }
+  .send:disabled{ opacity:.5; cursor:default; }
+  .hint{ color:var(--muted); font-size:11px; margin-top:7px; }
 
-  footer { border-top: 1px solid var(--line); background: var(--panel); padding: 12px 16px; flex: 0 0 auto; }
-  .attach-preview {
-    display: none; align-items: center; gap: 10px; background: var(--panel2);
-    border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; margin-bottom: 10px; font-size: 13px;
-  }
-  .attach-preview .x { margin-left: auto; background: transparent; border: none; color: var(--muted); font-size: 16px; }
-  .composer { display: flex; align-items: flex-end; gap: 10px; }
-  .icon-btn {
-    background: var(--panel2); border: 1px solid var(--line); color: var(--text);
-    border-radius: 10px; width: 46px; height: 46px; font-size: 20px; flex: 0 0 auto;
-  }
-  .icon-btn:hover { border-color: var(--accent); }
-  #composer-text { resize: none; min-height: 46px; max-height: 140px; padding: 12px 14px; line-height: 1.35; }
-  .send {
-    background: var(--accent); color: #fff; border: none; border-radius: 10px;
-    height: 46px; padding: 0 20px; font-size: 15px; font-weight: 600; flex: 0 0 auto;
-  }
-  .send:disabled { opacity: .5; cursor: default; }
-  .hint { color: var(--muted); font-size: 11px; margin-top: 6px; }
-  .center-note { color: var(--muted); text-align: center; margin-top: 40px; font-size: 14px; }
+  /* ---- modal ---- */
+  .modal{ position:fixed; inset:0; background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center; padding:20px; z-index:50; }
+  .modal-card{ width:100%; max-width:380px; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px; }
+  .modal-card h3{ margin:0 0 14px; font-size:17px; }
+  .modal-card label{ display:block; font-size:13px; color:var(--muted); margin:12px 0 5px; }
+  .modal-actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:20px; }
+  .modal-actions .ghost{ background:transparent; border:1px solid var(--line); color:var(--muted); border-radius:9px; padding:10px 16px; }
+  .modal-actions .primary{ background:var(--accent); border:none; color:#fff; border-radius:9px; padding:10px 18px; font-weight:600; }
 
-  /* modal */
-  .modal {
-    position: fixed; inset: 0; background: rgba(0,0,0,.55);
-    display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 50;
+  @media (max-width:640px){
+    #bodyrow{ flex-direction:column; }
+    .todo{ width:100%; border-right:none; border-bottom:1px solid var(--line); }
+    .todo-list{ max-height:180px; }
+    .bubble{ max-width:88%; }
   }
-  .modal-card { width: 100%; max-width: 380px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
-  .modal-card h3 { margin: 0 0 14px; font-size: 17px; }
-  .modal-card label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 5px; }
-  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
-  .modal-actions .ghost { background: transparent; border: 1px solid var(--line); color: var(--muted); border-radius: 9px; padding: 10px 16px; }
-  .modal-actions .primary { background: var(--accent); border: none; color: #fff; border-radius: 9px; padding: 10px 18px; font-weight: 600; }
 </style>
 </head>
 <body>
 
-  <!-- ====================== LOGIN ====================== -->
+  <!-- ============ LOGIN ============ -->
   <div id="login">
     <div class="card">
       <h1 class="brand">Platforma Scoala</h1>
@@ -230,39 +164,35 @@
     </div>
   </div>
 
-  <!-- ====================== APP ====================== -->
+  <!-- ============ APP ============ -->
   <div id="app" class="hidden">
     <header>
       <div class="avatar" id="me-avatar" title="Schimbă poza ta"></div>
-      <div>
-        <div class="title">Platforma Scoala</div>
-        <div class="channel"># general — toți colegii</div>
-      </div>
+      <div class="title">Platforma Scoala</div>
       <div class="spacer"></div>
       <div class="who" id="who"></div>
       <button id="logout-btn" class="link-btn">Ieșire</button>
     </header>
 
-    <div id="body">
-      <aside id="sidebar">
-        <div class="side-section">
-          <div class="side-title" id="colleagues-title">Colegi</div>
-          <div id="user-list"></div>
+    <div class="convbar" id="convbar"><span class="cb-label">Conversații</span></div>
+
+    <div id="bodyrow">
+      <!-- DE FĂCUT -->
+      <aside class="todo">
+        <div class="todo-head">
+          <div><div class="tt">📋 De făcut</div><div class="cc" id="todo-count"></div></div>
+          <button class="add" id="add-task" title="Adaugă task">+</button>
         </div>
-        <div class="side-section">
-          <div class="side-title">De făcut <button class="add" id="add-task" title="Adaugă task">+</button></div>
-          <div id="task-list"></div>
-        </div>
+        <div class="todo-list" id="task-list"></div>
       </aside>
 
-      <div id="main">
-        <div id="messages">
-          <div class="center-note" id="loading-note">Se încarcă mesajele…</div>
-        </div>
+      <!-- CHAT -->
+      <div class="chat">
+        <div class="chat-head" id="chat-head"></div>
+        <div id="messages"><div class="center-note">Se încarcă…</div></div>
         <footer>
           <div class="attach-preview" id="attach-preview">
-            <span>📎</span>
-            <span id="attach-name"></span>
+            <span>📎</span><span id="attach-name"></span>
             <button class="x" id="attach-remove" title="Scoate fișierul">✕</button>
           </div>
           <div class="composer">
@@ -277,10 +207,8 @@
     </div>
   </div>
 
-  <!-- input ascuns pentru poza de profil -->
   <input type="file" id="avatar-input" accept="image/*" class="hidden" />
 
-  <!-- modal task -->
   <div id="task-modal" class="modal hidden">
     <div class="modal-card">
       <h3>Task nou</h3>
@@ -297,11 +225,9 @@
     </div>
   </div>
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-
   <script>
   // ============================================================
   const firebaseConfig = {
@@ -316,7 +242,7 @@
   const MAX_FILE_BYTES = 700 * 1024;
   const HEARTBEAT_MS = 25000;
   const ONLINE_WINDOW_MS = 60000;
-  const AVATAR_PX = 128; // poza de profil se micșorează la 128x128
+  const AVATAR_PX = 128;
   // ============================================================
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
@@ -327,413 +253,346 @@
   const loginView = el('login'), appView = el('app');
   const loginForm = el('login-form'), nameForm = el('name-form');
 
-  let currentUser = null, currentName = null;
-  let unsubMessages = null, unsubPresence = null, unsubUsers = null, unsubTasks = null;
-  let heartbeatTimer = null, presenceRenderTimer = null;
-  let presenceDocs = [], tasksDocs = [], usersMap = {};
-  let pendingFile = null;
+  let currentUser=null, currentName=null;
+  let usersMap={}, presenceDocs=[], tasksDocs=[];
+  let currentChannel='general', currentPeer=null; // peer uid pentru DM
+  let unsubMsgs=null, unsubPresence=null, unsubUsers=null, unsubTasks=null;
+  let heartbeatTimer=null, presenceRenderTimer=null;
+  let unreadUnsubs={}, unreadState={}, lastRead={};
+  let pendingFile=null;
 
-  function isAdmin(email) {
-    return ADMIN_EMAILS.map(e => e.toLowerCase()).includes((email || '').toLowerCase());
-  }
+  function isAdmin(email){ return ADMIN_EMAILS.map(e=>e.toLowerCase()).includes((email||'').toLowerCase()); }
+  function dmChannel(peer){ return 'dm_' + [currentUser.uid, peer].sort().join('__'); }
+
+  // localStorage (per dispozitiv, pentru necitite)
+  function loadLastRead(){ try{ lastRead = JSON.parse(localStorage.getItem('lastRead_'+currentUser.uid)||'{}'); }catch(e){ lastRead={}; } }
+  function saveLastRead(){ try{ localStorage.setItem('lastRead_'+currentUser.uid, JSON.stringify(lastRead)); }catch(e){} }
 
   // ---------------- LOGIN ----------------
   el('login-btn').addEventListener('click', doLogin);
-  el('password').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
-  async function doLogin() {
-    const email = el('email').value.trim(), pass = el('password').value;
-    const errBox = el('login-error'); errBox.textContent = '';
-    if (!email || !pass) { errBox.textContent = 'Completează e-mailul și parola.'; return; }
-    el('login-btn').disabled = true;
-    try { await auth.signInWithEmailAndPassword(email, pass); }
-    catch (e) { errBox.textContent = translateAuthError(e.code); }
-    finally { el('login-btn').disabled = false; }
+  el('password').addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
+  async function doLogin(){
+    const email=el('email').value.trim(), pass=el('password').value;
+    const errBox=el('login-error'); errBox.textContent='';
+    if(!email||!pass){ errBox.textContent='Completează e-mailul și parola.'; return; }
+    el('login-btn').disabled=true;
+    try{ await auth.signInWithEmailAndPassword(email,pass); }
+    catch(e){ errBox.textContent=translateAuthError(e.code); }
+    finally{ el('login-btn').disabled=false; }
   }
-  function translateAuthError(code) {
-    switch (code) {
+  function translateAuthError(code){
+    switch(code){
       case 'auth/invalid-email': return 'Adresa de e-mail nu este validă.';
       case 'auth/user-disabled': return 'Acest cont a fost dezactivat.';
-      case 'auth/user-not-found':
-      case 'auth/wrong-password':
-      case 'auth/invalid-credential': return 'E-mail sau parolă greșite.';
+      case 'auth/user-not-found': case 'auth/wrong-password': case 'auth/invalid-credential': return 'E-mail sau parolă greșite.';
       case 'auth/too-many-requests': return 'Prea multe încercări. Așteaptă puțin.';
       case 'auth/network-request-failed': return 'Fără conexiune la internet.';
       default: return 'Nu am putut autentifica. Încearcă din nou.';
     }
   }
-
   el('name-btn').addEventListener('click', saveName);
-  el('display-name').addEventListener('keydown', (e) => { if (e.key === 'Enter') saveName(); });
-  async function saveName() {
-    const name = el('display-name').value.trim();
-    const errBox = el('name-error'); errBox.textContent = '';
-    if (name.length < 2) { errBox.textContent = 'Scrie un nume (minim 2 litere).'; return; }
-    el('name-btn').disabled = true;
-    try {
-      await db.collection('users').doc(currentUser.uid).set({
-        displayName: name, email: currentUser.email,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true });
-      currentName = name; enterApp();
-    } catch (e) { errBox.textContent = 'Nu am putut salva numele.'; }
-    finally { el('name-btn').disabled = false; }
+  el('display-name').addEventListener('keydown', e=>{ if(e.key==='Enter') saveName(); });
+  async function saveName(){
+    const name=el('display-name').value.trim(); const errBox=el('name-error'); errBox.textContent='';
+    if(name.length<2){ errBox.textContent='Scrie un nume (minim 2 litere).'; return; }
+    el('name-btn').disabled=true;
+    try{
+      await db.collection('users').doc(currentUser.uid).set({ displayName:name, email:currentUser.email, createdAt:firebase.firestore.FieldValue.serverTimestamp() },{merge:true});
+      currentName=name; enterApp();
+    }catch(e){ errBox.textContent='Nu am putut salva numele.'; }
+    finally{ el('name-btn').disabled=false; }
   }
 
-  // ---------------- AUTH STATE ----------------
-  auth.onAuthStateChanged(async (user) => {
-    currentUser = user;
-    if (!user) {
+  // ---------------- AUTH ----------------
+  auth.onAuthStateChanged(async (user)=>{
+    currentUser=user;
+    if(!user){
       stopLive();
       appView.classList.add('hidden'); loginView.classList.remove('hidden');
       loginForm.classList.remove('hidden'); nameForm.classList.add('hidden');
-      el('password').value = ''; return;
+      el('password').value=''; return;
     }
-    try {
-      const doc = await db.collection('users').doc(user.uid).get();
-      if (doc.exists && doc.data().displayName) { currentName = doc.data().displayName; enterApp(); }
-      else {
-        loginView.classList.remove('hidden'); appView.classList.add('hidden');
-        loginForm.classList.add('hidden'); nameForm.classList.remove('hidden');
-        el('display-name').focus();
-      }
-    } catch (e) { currentName = user.email; enterApp(); }
+    try{
+      const doc=await db.collection('users').doc(user.uid).get();
+      if(doc.exists && doc.data().displayName){ currentName=doc.data().displayName; enterApp(); }
+      else{ loginView.classList.remove('hidden'); appView.classList.add('hidden'); loginForm.classList.add('hidden'); nameForm.classList.remove('hidden'); el('display-name').focus(); }
+    }catch(e){ currentName=user.email; enterApp(); }
   });
+  el('logout-btn').addEventListener('click', async ()=>{ await setPresence(false); auth.signOut(); });
 
-  el('logout-btn').addEventListener('click', async () => { await setPresence(false); auth.signOut(); });
-
-  function enterApp() {
+  function enterApp(){
     loginView.classList.add('hidden'); appView.classList.remove('hidden');
-    const admin = isAdmin(currentUser.email);
-    el('who').innerHTML = 'Conectat ca <b>' + escapeHtml(currentName) + '</b>' + (admin ? '<span class="badge">admin</span>' : '');
-    listenUsers(); listenMessages(); startPresence(); listenTasks();
-    renderMeAvatar();
+    const admin=isAdmin(currentUser.email);
+    el('who').innerHTML='<b>'+escapeHtml(currentName)+'</b>'+(admin?'<span class="badge">admin</span>':'');
+    loadLastRead(); renderMeAvatar();
+    listenUsers(); startPresence(); listenTasks();
+    selectConversation('general', null);
+  }
+  function stopLive(){
+    [unsubMsgs,unsubPresence,unsubUsers,unsubTasks].forEach(u=>{ if(u)u(); });
+    unsubMsgs=unsubPresence=unsubUsers=unsubTasks=null;
+    Object.values(unreadUnsubs).forEach(u=>{ if(u)u(); }); unreadUnsubs={}; unreadState={};
+    if(heartbeatTimer){ clearInterval(heartbeatTimer); heartbeatTimer=null; }
+    if(presenceRenderTimer){ clearInterval(presenceRenderTimer); presenceRenderTimer=null; }
   }
 
-  function stopLive() {
-    [unsubMessages, unsubPresence, unsubUsers, unsubTasks].forEach(u => { if (u) u(); });
-    unsubMessages = unsubPresence = unsubUsers = unsubTasks = null;
-    if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
-    if (presenceRenderTimer) { clearInterval(presenceRenderTimer); presenceRenderTimer = null; }
+  // ---------------- USERS + avatare ----------------
+  function listenUsers(){
+    if(unsubUsers) unsubUsers();
+    unsubUsers=db.collection('users').onSnapshot((snap)=>{
+      usersMap={}; snap.docs.forEach(d=>{ usersMap[d.id]=d.data(); });
+      renderMeAvatar(); renderConvbar(); renderChatHead(); setupUnread();
+    },()=>{});
   }
-
-  // ---------------- USERS (nume + poze) ----------------
-  function listenUsers() {
-    if (unsubUsers) unsubUsers();
-    unsubUsers = db.collection('users').onSnapshot((snap) => {
-      usersMap = {};
-      snap.docs.forEach(d => { usersMap[d.id] = d.data(); });
-      renderMeAvatar(); renderPresence(); // reîmprospătează pozele
-    }, () => {});
+  function nameOf(uid){ return (usersMap[uid] && usersMap[uid].displayName) || 'Coleg'; }
+  function avatarEl(uid, name){
+    const w=document.createElement('div'); w.className='avatar';
+    const u=usersMap[uid];
+    if(u&&u.photo){ const i=document.createElement('img'); i.src=u.photo; w.appendChild(i); }
+    else { w.textContent=(name||nameOf(uid)||'?').trim().charAt(0).toUpperCase(); w.style.background=colorFor(uid||name||'?'); }
+    return w;
   }
-
-  function avatarEl(uid, name, cls) {
-    const wrap = document.createElement('div');
-    wrap.className = 'avatar';
-    const u = usersMap[uid];
-    if (u && u.photo) {
-      const img = document.createElement('img'); img.src = u.photo; wrap.appendChild(img);
-    } else {
-      wrap.textContent = (name || '?').trim().charAt(0).toUpperCase();
-      wrap.style.background = colorFor(uid || name || '?');
-    }
-    return wrap;
+  function colorFor(s){ let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))%360; return 'hsl('+h+',45%,42%)'; }
+  function renderMeAvatar(){
+    const b=el('me-avatar'); if(!b||!currentUser) return; b.innerHTML='';
+    const u=usersMap[currentUser.uid];
+    if(u&&u.photo){ const i=document.createElement('img'); i.src=u.photo; b.appendChild(i); }
+    else { b.textContent=(currentName||'?').charAt(0).toUpperCase(); b.style.background=colorFor(currentUser.uid); }
   }
-  function colorFor(s) {
-    let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 360;
-    return 'hsl(' + h + ',45%,42%)';
-  }
-
-  function renderMeAvatar() {
-    const box = el('me-avatar'); if (!box || !currentUser) return;
-    box.innerHTML = '';
-    const u = usersMap[currentUser.uid];
-    if (u && u.photo) { const img = document.createElement('img'); img.src = u.photo; box.appendChild(img); }
-    else { box.textContent = (currentName || '?').charAt(0).toUpperCase(); box.style.background = colorFor(currentUser.uid); }
-  }
-
-  // schimbare poză profil
-  el('me-avatar').addEventListener('click', () => el('avatar-input').click());
-  el('avatar-input').addEventListener('change', (e) => {
-    const f = e.target.files[0]; el('avatar-input').value = '';
-    if (!f) return;
-    resizeImage(f, AVATAR_PX, (dataUrl) => {
-      db.collection('users').doc(currentUser.uid).set({ photo: dataUrl }, { merge: true })
-        .catch(() => alert('Nu am putut salva poza.'));
-    });
+  el('me-avatar').addEventListener('click', ()=>el('avatar-input').click());
+  el('avatar-input').addEventListener('change', (e)=>{
+    const f=e.target.files[0]; el('avatar-input').value=''; if(!f) return;
+    resizeImage(f, AVATAR_PX, (dataUrl)=>{ db.collection('users').doc(currentUser.uid).set({photo:dataUrl},{merge:true}).catch(()=>alert('Nu am putut salva poza.')); });
   });
-
-  function resizeImage(file, size, cb) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = size; canvas.height = size;
-        const ctx = canvas.getContext('2d');
-        // crop pătrat centrat
-        const s = Math.min(img.width, img.height);
-        const sx = (img.width - s) / 2, sy = (img.height - s) / 2;
-        ctx.drawImage(img, sx, sy, s, s, 0, 0, size, size);
-        cb(canvas.toDataURL('image/jpeg', 0.82));
-      };
-      img.onerror = () => alert('Imagine invalidă.');
-      img.src = reader.result;
-    };
+  function resizeImage(file,size,cb){
+    const reader=new FileReader();
+    reader.onload=()=>{ const img=new Image(); img.onload=()=>{ const c=document.createElement('canvas'); c.width=size; c.height=size; const ctx=c.getContext('2d'); const s=Math.min(img.width,img.height); ctx.drawImage(img,(img.width-s)/2,(img.height-s)/2,s,s,0,0,size,size); cb(c.toDataURL('image/jpeg',0.82)); }; img.onerror=()=>alert('Imagine invalidă.'); img.src=reader.result; };
     reader.readAsDataURL(file);
   }
 
-  // ---------------- MESAJE ----------------
-  function listenMessages() {
-    if (unsubMessages) unsubMessages();
-    unsubMessages = db.collection('messages').orderBy('createdAt', 'asc').limitToLast(300)
-      .onSnapshot((snap) => renderMessages(snap.docs), (err) => {
-        el('messages').innerHTML = '<div class="center-note">Nu pot citi mesajele.<br><small>' + escapeHtml(err.message) + '</small></div>';
-      });
+  // ---------------- PREZENȚĂ ----------------
+  function startPresence(){
+    setPresence(true);
+    if(heartbeatTimer) clearInterval(heartbeatTimer);
+    heartbeatTimer=setInterval(()=>setPresence(true), HEARTBEAT_MS);
+    if(unsubPresence) unsubPresence();
+    unsubPresence=db.collection('presence').onSnapshot((snap)=>{ presenceDocs=snap.docs.map(d=>({id:d.id,...d.data()})); renderConvbar(); renderChatHead(); },()=>{});
+    if(presenceRenderTimer) clearInterval(presenceRenderTimer);
+    presenceRenderTimer=setInterval(()=>{ renderConvbar(); renderChatHead(); }, 15000);
   }
-  function renderMessages(docs) {
-    const box = el('messages');
-    const nearBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 120;
-    box.innerHTML = '';
-    if (docs.length === 0) { box.innerHTML = '<div class="center-note">Încă niciun mesaj. Scrie primul! 👋</div>'; return; }
-    const admin = isAdmin(currentUser.email);
-    let lastDay = '';
-    docs.forEach((d) => {
-      const m = d.data();
-      const ts = m.createdAt && m.createdAt.toDate ? m.createdAt.toDate() : new Date();
-      const dayLabel = ts.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' });
-      if (dayLabel !== lastDay) {
-        lastDay = dayLabel;
-        const sep = document.createElement('div'); sep.className = 'day-sep'; sep.textContent = dayLabel; box.appendChild(sep);
-      }
-      const mine = m.uid === currentUser.uid;
-      const row = document.createElement('div'); row.className = 'row' + (mine ? ' mine' : '');
-      if (!mine) row.appendChild(avatarEl(m.uid, m.displayName));
-      const bubble = document.createElement('div'); bubble.className = 'bubble';
-      const meta = document.createElement('div'); meta.className = 'meta';
-      meta.innerHTML = '<b>' + escapeHtml(m.displayName || 'Cineva') + '</b>';
-      bubble.appendChild(meta);
-      if (m.type === 'file' && m.fileData) {
-        bubble.appendChild(buildFileEl(m));
-        if (m.text) { const t = document.createElement('div'); t.className = 'text'; t.textContent = m.text; t.style.marginTop = '6px'; bubble.appendChild(t); }
-      } else {
-        const t = document.createElement('div'); t.className = 'text'; t.textContent = m.text || ''; bubble.appendChild(t);
-      }
-      const time = document.createElement('div'); time.className = 'time';
-      time.textContent = ts.toLocaleTimeString('ro-RO', { hour: '2-digit', minute: '2-digit' });
-      bubble.appendChild(time);
-      if (mine || admin) {
-        const del = document.createElement('button'); del.className = 'del'; del.textContent = '🗑'; del.title = 'Șterge mesajul';
-        del.addEventListener('click', () => deleteMessage(d.id)); bubble.appendChild(del);
-      }
-      row.appendChild(bubble);
-      box.appendChild(row);
+  async function setPresence(online){
+    if(!currentUser) return;
+    try{ await db.collection('presence').doc(currentUser.uid).set({ displayName:currentName||currentUser.email, online:!!online, lastSeen:firebase.firestore.FieldValue.serverTimestamp() },{merge:true}); }catch(e){}
+  }
+  function isOnline(uid){
+    const p=presenceDocs.find(x=>x.id===uid); if(!p) return false;
+    const seen=p.lastSeen&&p.lastSeen.toDate?p.lastSeen.toDate().getTime():0;
+    return !!p.online && (Date.now()-seen<ONLINE_WINDOW_MS);
+  }
+  window.addEventListener('beforeunload', ()=>{ setPresence(false); });
+  document.addEventListener('visibilitychange', ()=>{ setPresence(document.visibilityState==='visible'); });
+
+  // ---------------- CONVERSAȚII ----------------
+  function renderConvbar(){
+    const bar=el('convbar'); if(!bar) return;
+    bar.innerHTML='<span class="cb-label">Conversații</span>';
+    // General
+    bar.appendChild(convChip('general', null, '#', '# General', false, unreadState['general']));
+    // colegii (toți userii în afară de mine)
+    const others=Object.keys(usersMap).filter(uid=>uid!==(currentUser&&currentUser.uid));
+    others.sort((a,b)=> nameOf(a).localeCompare(nameOf(b),'ro'));
+    others.forEach(uid=>{
+      const ch=dmChannel(uid);
+      bar.appendChild(convChip(ch, uid, null, nameOf(uid), isOnline(uid), unreadState[ch]));
     });
-    if (nearBottom) box.scrollTop = box.scrollHeight;
   }
-  function buildFileEl(m) {
-    const wrap = document.createElement('div'); wrap.className = 'file';
-    wrap.innerHTML = '<div class="ico">📄</div><div class="info"><div class="name">' + escapeHtml(m.fileName) +
-      '</div><div class="size">' + formatSize(m.fileSize || 0) + '</div></div>';
-    const btn = document.createElement('button'); btn.className = 'dl'; btn.textContent = 'Descarcă';
-    btn.addEventListener('click', () => downloadFile(m)); wrap.appendChild(btn); return wrap;
-  }
-  function downloadFile(m) {
-    const a = document.createElement('a'); a.href = m.fileData; a.download = m.fileName || 'fisier';
-    document.body.appendChild(a); a.click(); a.remove();
-  }
-  async function deleteMessage(id) {
-    try { await db.collection('messages').doc(id).delete(); } catch (e) { alert('Nu am putut șterge mesajul.'); }
+  function convChip(channel, peer, hash, label, online, unread){
+    const chip=document.createElement('div');
+    chip.className='cchip'+(channel===currentChannel?' active':'');
+    const av=document.createElement('div'); av.className='cav';
+    if(hash){ const a=document.createElement('div'); a.className='avatar'; a.textContent='#'; a.style.background='#2d6a4f'; av.appendChild(a); }
+    else {
+      av.appendChild(avatarEl(peer, label));
+      const st=document.createElement('div'); st.className='st'+(online?' on':''); av.appendChild(st);
+    }
+    const nm=document.createElement('span'); nm.className='nm'; nm.textContent=label;
+    chip.appendChild(av); chip.appendChild(nm);
+    if(unread){ const u=document.createElement('span'); u.className='ub'; chip.appendChild(u); }
+    chip.addEventListener('click', ()=>selectConversation(channel, peer));
+    return chip;
   }
 
-  // ---------------- PREZENȚĂ ----------------
-  function startPresence() {
-    setPresence(true);
-    if (heartbeatTimer) clearInterval(heartbeatTimer);
-    heartbeatTimer = setInterval(() => setPresence(true), HEARTBEAT_MS);
-    if (unsubPresence) unsubPresence();
-    unsubPresence = db.collection('presence').onSnapshot((snap) => {
-      presenceDocs = snap.docs.map(d => ({ id: d.id, ...d.data() })); renderPresence();
-    }, () => {});
-    if (presenceRenderTimer) clearInterval(presenceRenderTimer);
-    presenceRenderTimer = setInterval(renderPresence, 15000);
+  function selectConversation(channel, peer){
+    currentChannel=channel; currentPeer=peer;
+    lastRead[channel]=Date.now(); unreadState[channel]=false; saveLastRead();
+    renderConvbar(); renderChatHead();
+    listenMessages();
   }
-  async function setPresence(online) {
-    if (!currentUser) return;
-    try {
-      await db.collection('presence').doc(currentUser.uid).set({
-        displayName: currentName || currentUser.email, online: !!online,
-        lastSeen: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true });
-    } catch (e) {}
+  function renderChatHead(){
+    const h=el('chat-head'); if(!h) return; h.innerHTML='';
+    if(currentChannel==='general'){
+      const a=document.createElement('div'); a.className='avatar'; a.textContent='#'; a.style.background='#2d6a4f'; a.style.width='38px'; a.style.height='38px';
+      const box=document.createElement('div'); box.innerHTML='<div class="ch-name"># General</div><div class="ch-sub">toți colegii</div>';
+      h.appendChild(a); h.appendChild(box);
+    } else {
+      h.appendChild(avatarEl(currentPeer, nameOf(currentPeer)));
+      const on=isOnline(currentPeer);
+      const box=document.createElement('div');
+      box.innerHTML='<div class="ch-name">'+escapeHtml(nameOf(currentPeer))+'</div><div class="ch-sub '+(on?'on':'')+'">'+(on?'activ acum':'offline')+'</div>';
+      h.appendChild(box);
+    }
   }
-  function renderPresence() {
-    const list = el('user-list'); if (!list) return;
-    const now = Date.now();
-    const items = presenceDocs.map(p => {
-      const seen = p.lastSeen && p.lastSeen.toDate ? p.lastSeen.toDate().getTime() : 0;
-      const online = !!p.online && (now - seen < ONLINE_WINDOW_MS);
-      const nm = (usersMap[p.id] && usersMap[p.id].displayName) || p.displayName || 'Cineva';
-      return { uid: p.id, name: nm, online, seen, me: p.id === (currentUser && currentUser.uid) };
+
+  function msgCol(channel){ return db.collection('channels').doc(channel).collection('messages'); }
+
+  function listenMessages(){
+    if(unsubMsgs) unsubMsgs();
+    const box=el('messages'); box.innerHTML='<div class="center-note">Se încarcă…</div>';
+    unsubMsgs=msgCol(currentChannel).orderBy('createdAt','asc').limitToLast(300).onSnapshot((snap)=>{
+      renderMessages(snap.docs);
+      // am citit tot ce e în conversația activă
+      lastRead[currentChannel]=Date.now(); unreadState[currentChannel]=false; saveLastRead();
+    },(err)=>{ box.innerHTML='<div class="center-note">Nu pot citi mesajele.<br><small>'+escapeHtml(err.message)+'</small></div>'; });
+  }
+
+  function renderMessages(docs){
+    const box=el('messages');
+    const nearBottom=box.scrollHeight-box.scrollTop-box.clientHeight<140;
+    box.innerHTML='';
+    if(docs.length===0){
+      box.innerHTML='<div class="center-note">'+(currentChannel==='general'?'Încă niciun mesaj în General. Scrie primul! 👋':'Încă nicio discuție cu '+escapeHtml(nameOf(currentPeer))+'. Scrie primul mesaj! 👋')+'</div>';
+      return;
+    }
+    const admin=isAdmin(currentUser.email); let lastDay='';
+    docs.forEach((d)=>{
+      const m=d.data();
+      const ts=m.createdAt&&m.createdAt.toDate?m.createdAt.toDate():new Date();
+      const dayLabel=ts.toLocaleDateString('ro-RO',{day:'numeric',month:'long',year:'numeric'});
+      if(dayLabel!==lastDay){ lastDay=dayLabel; const s=document.createElement('div'); s.className='day-sep'; s.textContent=dayLabel; box.appendChild(s); }
+      const mine=m.uid===currentUser.uid;
+      const row=document.createElement('div'); row.className='row'+(mine?' mine':'');
+      if(!mine) row.appendChild(avatarEl(m.uid, m.displayName));
+      const bubble=document.createElement('div'); bubble.className='bubble';
+      if(currentChannel==='general' && !mine){ const meta=document.createElement('div'); meta.className='meta'; meta.innerHTML='<b>'+escapeHtml(m.displayName||nameOf(m.uid))+'</b>'; bubble.appendChild(meta); }
+      if(m.type==='file'&&m.fileData){ bubble.appendChild(buildFileEl(m)); if(m.text){ const t=document.createElement('div'); t.className='text'; t.textContent=m.text; t.style.marginTop='6px'; bubble.appendChild(t);} }
+      else { const t=document.createElement('div'); t.className='text'; t.textContent=m.text||''; bubble.appendChild(t); }
+      const time=document.createElement('div'); time.className='time'; time.textContent=ts.toLocaleTimeString('ro-RO',{hour:'2-digit',minute:'2-digit'}); bubble.appendChild(time);
+      if(mine||admin){ const del=document.createElement('button'); del.className='del'; del.textContent='🗑'; del.title='Șterge mesajul'; del.addEventListener('click',()=>deleteMessage(d.id)); bubble.appendChild(del); }
+      row.appendChild(bubble); box.appendChild(row);
     });
-    items.sort((a, b) => (b.online - a.online) || a.name.localeCompare(b.name, 'ro'));
-    const onlineCount = items.filter(i => i.online).length;
-    const title = el('colleagues-title'); if (title) title.textContent = 'Colegi — ' + onlineCount + ' activi';
-    list.innerHTML = '';
-    if (items.length === 0) { list.innerHTML = '<div class="empty-mini">Nimeni încă.</div>'; return; }
-    items.forEach(i => {
-      const row = document.createElement('div'); row.className = 'user-item' + (i.me ? ' me' : '');
-      const aw = document.createElement('div'); aw.className = 'avatar-wrap';
-      aw.appendChild(avatarEl(i.uid, i.name));
-      const dot = document.createElement('div'); dot.className = 'dot' + (i.online ? ' on' : ''); aw.appendChild(dot);
-      const info = document.createElement('div'); info.className = 'u-info';
-      const nm = document.createElement('div'); nm.className = 'u-name'; nm.textContent = i.name + (i.me ? ' (tu)' : '');
-      const st = document.createElement('div'); st.className = 'u-status';
-      st.textContent = i.online ? 'activ acum' : (i.seen ? 'văzut ' + timeAgo(now - i.seen) : 'offline');
-      info.appendChild(nm); info.appendChild(st);
-      row.appendChild(aw); row.appendChild(info); list.appendChild(row);
+    if(nearBottom) box.scrollTop=box.scrollHeight;
+  }
+  function buildFileEl(m){
+    const w=document.createElement('div'); w.className='file';
+    w.innerHTML='<div class="ico">📄</div><div class="info"><div class="name">'+escapeHtml(m.fileName)+'</div><div class="size">'+formatSize(m.fileSize||0)+'</div></div>';
+    const b=document.createElement('button'); b.className='dl'; b.textContent='Descarcă'; b.addEventListener('click',()=>downloadFile(m)); w.appendChild(b); return w;
+  }
+  function downloadFile(m){ const a=document.createElement('a'); a.href=m.fileData; a.download=m.fileName||'fisier'; document.body.appendChild(a); a.click(); a.remove(); }
+  async function deleteMessage(id){ try{ await msgCol(currentChannel).doc(id).delete(); }catch(e){ alert('Nu am putut șterge mesajul.'); } }
+
+  // necitite: câte un ascultător mic pe fiecare conversație
+  function setupUnread(){
+    const wanted=['general'];
+    Object.keys(usersMap).filter(uid=>uid!==(currentUser&&currentUser.uid)).forEach(uid=> wanted.push(dmChannel(uid)));
+    // oprește ascultătorii care nu mai trebuie
+    Object.keys(unreadUnsubs).forEach(ch=>{ if(!wanted.includes(ch)){ unreadUnsubs[ch](); delete unreadUnsubs[ch]; } });
+    wanted.forEach(ch=>{
+      if(unreadUnsubs[ch]) return;
+      if(lastRead[ch]===undefined){ lastRead[ch]=Date.now(); saveLastRead(); }
+      unreadUnsubs[ch]=msgCol(ch).orderBy('createdAt','desc').limit(1).onSnapshot((snap)=>{
+        let unread=false;
+        if(!snap.empty){
+          const m=snap.docs[0].data();
+          const t=m.createdAt&&m.createdAt.toDate?m.createdAt.toDate().getTime():0;
+          if(m.uid!==currentUser.uid && t>(lastRead[ch]||0) && ch!==currentChannel) unread=true;
+        }
+        if(unreadState[ch]!==unread){ unreadState[ch]=unread; renderConvbar(); }
+      },()=>{});
     });
   }
-  function timeAgo(ms) {
-    const s = Math.floor(ms / 1000);
-    if (s < 60) return 'acum câteva secunde';
-    const m = Math.floor(s / 60); if (m < 60) return 'acum ' + m + ' min';
-    const h = Math.floor(m / 60); if (h < 24) return 'acum ' + h + (h === 1 ? ' oră' : ' ore');
-    const d = Math.floor(h / 24); return 'acum ' + d + (d === 1 ? ' zi' : ' zile');
-  }
-  window.addEventListener('beforeunload', () => { setPresence(false); });
-  document.addEventListener('visibilitychange', () => { setPresence(document.visibilityState === 'visible'); });
 
   // ---------------- TASK-URI ----------------
-  el('add-task').addEventListener('click', () => {
-    el('t-title').value = ''; el('t-part').value = ''; el('t-due').value = '';
-    el('task-modal').classList.remove('hidden'); el('t-title').focus();
-  });
-  el('t-cancel').addEventListener('click', () => el('task-modal').classList.add('hidden'));
-  el('task-modal').addEventListener('click', (e) => { if (e.target === el('task-modal')) el('task-modal').classList.add('hidden'); });
+  el('add-task').addEventListener('click', ()=>{ el('t-title').value=''; el('t-part').value=''; el('t-due').value=''; el('task-modal').classList.remove('hidden'); el('t-title').focus(); });
+  el('t-cancel').addEventListener('click', ()=>el('task-modal').classList.add('hidden'));
+  el('task-modal').addEventListener('click', (e)=>{ if(e.target===el('task-modal')) el('task-modal').classList.add('hidden'); });
   el('t-save').addEventListener('click', saveTask);
-  el('t-title').addEventListener('keydown', (e) => { if (e.key === 'Enter') saveTask(); });
-
-  async function saveTask() {
-    const title = el('t-title').value.trim();
-    if (!title) { el('t-title').focus(); return; }
-    const part = el('t-part').value.trim();
-    const due = el('t-due').value; // 'YYYY-MM-DD' sau ''
-    el('t-save').disabled = true;
-    try {
-      await db.collection('tasks').add({
-        title, participants: part || '', dueDate: due || '',
-        done: false, createdBy: currentUser.uid, createdByName: currentName,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      el('task-modal').classList.add('hidden');
-    } catch (e) { alert('Nu am putut salva task-ul.'); }
-    finally { el('t-save').disabled = false; }
+  el('t-title').addEventListener('keydown', e=>{ if(e.key==='Enter') saveTask(); });
+  async function saveTask(){
+    const title=el('t-title').value.trim(); if(!title){ el('t-title').focus(); return; }
+    el('t-save').disabled=true;
+    try{ await db.collection('tasks').add({ title, participants:el('t-part').value.trim()||'', dueDate:el('t-due').value||'', done:false, createdBy:currentUser.uid, createdByName:currentName, createdAt:firebase.firestore.FieldValue.serverTimestamp() }); el('task-modal').classList.add('hidden'); }
+    catch(e){ alert('Nu am putut salva task-ul.'); }
+    finally{ el('t-save').disabled=false; }
   }
-
-  function listenTasks() {
-    if (unsubTasks) unsubTasks();
-    unsubTasks = db.collection('tasks').orderBy('createdAt', 'asc').onSnapshot((snap) => {
-      tasksDocs = snap.docs.map(d => ({ id: d.id, ...d.data() })); renderTasks();
-    }, () => {});
+  function listenTasks(){
+    if(unsubTasks) unsubTasks();
+    unsubTasks=db.collection('tasks').orderBy('createdAt','asc').onSnapshot((snap)=>{ tasksDocs=snap.docs.map(d=>({id:d.id,...d.data()})); renderTasks(); },()=>{});
   }
-  function renderTasks() {
-    const list = el('task-list'); if (!list) return;
-    const admin = isAdmin(currentUser.email);
-    // nefinalizate întâi; în interior după termen
-    const items = tasksDocs.slice().sort((a, b) => {
-      if (!!a.done !== !!b.done) return a.done ? 1 : -1;
-      const ad = a.dueDate || '9999', bd = b.dueDate || '9999';
-      return ad.localeCompare(bd);
-    });
-    list.innerHTML = '';
-    if (items.length === 0) { list.innerHTML = '<div class="empty-mini">Niciun task. Apasă + ca să adaugi.</div>'; return; }
-    const today = new Date().toISOString().slice(0, 10);
-    items.forEach(t => {
-      const row = document.createElement('div'); row.className = 'task' + (t.done ? ' done' : '');
-      const chk = document.createElement('button'); chk.className = 'chk'; chk.textContent = t.done ? '✓' : '';
-      chk.title = t.done ? 'Marchează nefinalizat' : 'Marchează gata';
-      chk.addEventListener('click', () => toggleTask(t));
-      const body = document.createElement('div'); body.className = 't-body';
-      const ti = document.createElement('div'); ti.className = 't-title'; ti.textContent = t.title;
-      body.appendChild(ti);
-      const metaBits = [];
-      if (t.participants) metaBits.push('👥 ' + t.participants);
-      const meta = document.createElement('div'); meta.className = 't-meta';
-      meta.textContent = metaBits.join('  ');
-      if (t.dueDate) {
-        const due = document.createElement('span');
-        const overdue = !t.done && t.dueDate < today;
-        due.className = 't-due' + (overdue ? ' overdue' : '');
-        due.textContent = (metaBits.length ? '  ' : '') + '🗓 până la ' + formatDate(t.dueDate) + (overdue ? ' (depășit)' : '');
-        meta.appendChild(due);
+  function renderTasks(){
+    const list=el('task-list'); if(!list) return;
+    const admin=isAdmin(currentUser.email);
+    const items=tasksDocs.slice().sort((a,b)=>{ if(!!a.done!==!!b.done) return a.done?1:-1; return (a.dueDate||'9999').localeCompare(b.dueDate||'9999'); });
+    const active=items.filter(t=>!t.done).length;
+    const today=new Date().toISOString().slice(0,10);
+    const overdue=items.filter(t=>!t.done&&t.dueDate&&t.dueDate<today).length;
+    el('todo-count').innerHTML= active+' active'+(overdue?' · <span class="ovl">'+overdue+' depășit'+(overdue>1?'e':'')+'</span>':'');
+    list.innerHTML='';
+    if(items.length===0){ list.innerHTML='<div class="empty-mini">Niciun task. Apasă + ca să adaugi.</div>'; return; }
+    items.forEach(t=>{
+      const row=document.createElement('div'); row.className='task'+(t.done?' done':'')+(!t.done&&t.dueDate&&t.dueDate<today?' ov':'');
+      const chk=document.createElement('button'); chk.className='chk'; chk.textContent=t.done?'✓':''; chk.title=t.done?'Marchează nefinalizat':'Marchează gata'; chk.addEventListener('click',()=>toggleTask(t));
+      const body=document.createElement('div'); body.className='t-body';
+      const ti=document.createElement('div'); ti.className='t-title'; ti.textContent=t.title; body.appendChild(ti);
+      if(t.participants||t.dueDate){
+        const meta=document.createElement('div'); meta.className='t-meta';
+        if(t.participants) meta.appendChild(document.createTextNode('👥 '+t.participants));
+        if(t.dueDate){ if(t.participants) meta.appendChild(document.createElement('br')); const due=document.createElement('span'); const ov=!t.done&&t.dueDate<today; due.className='t-due'+(ov?' ovl':''); due.textContent='🗓 până la '+formatDate(t.dueDate)+(ov?' (depășit)':''); meta.appendChild(due); }
+        body.appendChild(meta);
       }
-      if (t.participants || t.dueDate) body.appendChild(meta);
+      const sb=document.createElement('span'); sb.className=t.done?'done-badge':'prog-badge'; sb.textContent=t.done?'✓ Finalizat':'● În lucru'; body.appendChild(sb);
       row.appendChild(chk); row.appendChild(body);
-      if (t.createdBy === currentUser.uid || admin) {
-        const del = document.createElement('button'); del.className = 't-del'; del.textContent = '🗑'; del.title = 'Șterge task-ul';
-        del.addEventListener('click', () => deleteTask(t.id)); row.appendChild(del);
-      }
+      if(t.createdBy===currentUser.uid||admin){ const del=document.createElement('button'); del.className='t-del'; del.textContent='🗑'; del.title='Șterge task-ul'; del.addEventListener('click',()=>deleteTask(t.id)); row.appendChild(del); }
       list.appendChild(row);
     });
   }
-  async function toggleTask(t) {
-    try { await db.collection('tasks').doc(t.id).update({ done: !t.done }); } catch (e) { alert('Nu am putut actualiza task-ul.'); }
-  }
-  async function deleteTask(id) {
-    try { await db.collection('tasks').doc(id).delete(); } catch (e) { alert('Nu am putut șterge task-ul.'); }
-  }
-  function formatDate(ymd) {
-    const p = ymd.split('-'); if (p.length !== 3) return ymd;
-    return p[2] + '.' + p[1] + '.' + p[0];
-  }
+  async function toggleTask(t){ try{ await db.collection('tasks').doc(t.id).update({done:!t.done}); }catch(e){ alert('Nu am putut actualiza task-ul.'); } }
+  async function deleteTask(id){ try{ await db.collection('tasks').doc(id).delete(); }catch(e){ alert('Nu am putut șterge task-ul.'); } }
+  function formatDate(ymd){ const p=ymd.split('-'); return p.length===3? p[2]+'.'+p[1]+'.'+p[0] : ymd; }
 
-  // ---------------- TRIMITERE MESAJ ----------------
-  const textArea = el('composer-text');
+  // ---------------- TRIMITERE ----------------
+  const textArea=el('composer-text');
   textArea.addEventListener('input', autoGrow);
-  textArea.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
-  function autoGrow() { textArea.style.height = 'auto'; textArea.style.height = Math.min(textArea.scrollHeight, 140) + 'px'; }
+  textArea.addEventListener('keydown', e=>{ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendMessage(); } });
+  function autoGrow(){ textArea.style.height='auto'; textArea.style.height=Math.min(textArea.scrollHeight,160)+'px'; }
   el('send-btn').addEventListener('click', sendMessage);
-  async function sendMessage() {
-    const text = textArea.value.trim();
-    if (!text && !pendingFile) return;
-    const base = { uid: currentUser.uid, displayName: currentName, createdAt: firebase.firestore.FieldValue.serverTimestamp() };
+  async function sendMessage(){
+    const text=textArea.value.trim(); if(!text&&!pendingFile) return;
+    const base={ uid:currentUser.uid, displayName:currentName, createdAt:firebase.firestore.FieldValue.serverTimestamp() };
+    if(currentChannel!=='general') base.members=[currentUser.uid, currentPeer];
     let payload = pendingFile
-      ? Object.assign(base, { type: 'file', text: text || '', fileName: pendingFile.name, fileType: pendingFile.type, fileSize: pendingFile.size, fileData: pendingFile.dataUrl })
-      : Object.assign(base, { type: 'text', text });
-    el('send-btn').disabled = true;
-    try { await db.collection('messages').add(payload); textArea.value = ''; autoGrow(); clearAttachment(); }
-    catch (e) { alert('Nu am putut trimite mesajul.'); }
-    finally { el('send-btn').disabled = false; textArea.focus(); }
+      ? Object.assign(base,{ type:'file', text:text||'', fileName:pendingFile.name, fileType:pendingFile.type, fileSize:pendingFile.size, fileData:pendingFile.dataUrl })
+      : Object.assign(base,{ type:'text', text });
+    el('send-btn').disabled=true;
+    try{ await msgCol(currentChannel).add(payload); textArea.value=''; autoGrow(); clearAttachment(); }
+    catch(e){ alert('Nu am putut trimite mesajul.'); }
+    finally{ el('send-btn').disabled=false; textArea.focus(); }
   }
 
-  // ---------------- ATAȘARE FIȘIER ----------------
-  el('attach-btn').addEventListener('click', () => el('file-input').click());
+  // ---------------- ATAȘARE ----------------
+  el('attach-btn').addEventListener('click', ()=>el('file-input').click());
   el('attach-remove').addEventListener('click', clearAttachment);
-  el('file-input').addEventListener('change', (e) => {
-    const f = e.target.files[0]; if (!f) return;
-    if (f.size > MAX_FILE_BYTES) {
-      alert('Fișierul e prea mare (' + formatSize(f.size) + ').\nDeocamdată se pot trimite fișiere până la 700 KB.');
-      el('file-input').value = ''; return;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      pendingFile = { name: f.name, type: f.type || 'application/octet-stream', size: f.size, dataUrl: reader.result };
-      el('attach-name').textContent = f.name + '  (' + formatSize(f.size) + ')';
-      el('attach-preview').style.display = 'flex';
-    };
-    reader.readAsDataURL(f); el('file-input').value = '';
+  el('file-input').addEventListener('change', (e)=>{
+    const f=e.target.files[0]; if(!f) return;
+    if(f.size>MAX_FILE_BYTES){ alert('Fișierul e prea mare ('+formatSize(f.size)+').\nDeocamdată se pot trimite fișiere până la 700 KB.'); el('file-input').value=''; return; }
+    const reader=new FileReader();
+    reader.onload=()=>{ pendingFile={ name:f.name, type:f.type||'application/octet-stream', size:f.size, dataUrl:reader.result }; el('attach-name').textContent=f.name+'  ('+formatSize(f.size)+')'; el('attach-preview').style.display='flex'; };
+    reader.readAsDataURL(f); el('file-input').value='';
   });
-  function clearAttachment() { pendingFile = null; el('attach-preview').style.display = 'none'; el('attach-name').textContent = ''; }
+  function clearAttachment(){ pendingFile=null; el('attach-preview').style.display='none'; el('attach-name').textContent=''; }
 
-  // ---------------- UTILITARE ----------------
-  function escapeHtml(s) {
-    return (s || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  }
-  function formatSize(bytes) {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
-    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
-  }
+  // ---------------- UTIL ----------------
+  function escapeHtml(s){ return (s||'').replace(/[&<>"']/g,(c)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function formatSize(b){ if(b<1024) return b+' B'; if(b<1048576) return (b/1024).toFixed(0)+' KB'; return (b/1048576).toFixed(1)+' MB'; }
   </script>
 </body>
 </html>
