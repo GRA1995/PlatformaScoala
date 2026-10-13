@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Platforma Scoala</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel2: #1e222b;
+    --line: #2a2f3a;
+    --text: #eef1f6;
+    --muted: #949bab;
+    --accent: #3b82f6;
+    --accent-ink: #ffffff;
+    --danger: #ef4444;
+    --me: #234e8a;
+    --other: #222733;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font-family: inherit; cursor: pointer; }
+  input {
+    font-family: inherit;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 15px;
+    width: 100%;
+    outline: none;
+  }
+  input:focus { border-color: var(--accent); }
+  .hidden { display: none !important; }
+
+  /* ---------- Login ---------- */
+  #login {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 30px 26px;
+  }
+  .brand { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+  .brand-sub { color: var(--muted); font-size: 14px; margin: 0 0 22px; }
+  .field-label { font-size: 13px; color: var(--muted); margin: 14px 0 6px; }
+  .btn {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .btn:disabled { opacity: .55; cursor: default; }
+  .msg-error {
+    color: var(--danger);
+    font-size: 13px;
+    margin-top: 14px;
+    min-height: 16px;
+    text-align: center;
+  }
+
+  /* ---------- App ---------- */
+  #app { height: 100%; display: flex; flex-direction: column; }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+  }
+  header .title { font-weight: 700; font-size: 16px; }
+  header .channel { color: var(--muted); font-size: 13px; }
+  header .spacer { flex: 1; }
+  header .who { font-size: 13px; color: var(--muted); text-align: right; }
+  header .who b { color: var(--text); }
+  .badge {
+    font-size: 11px;
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 999px;
+    margin-left: 6px;
+  }
+  .link-btn {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+  .link-btn:hover { color: var(--text); border-color: var(--muted); }
+
+  #messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .row { display: flex; }
+  .row.mine { justify-content: flex-end; }
+  .bubble {
+    max-width: 72%;
+    background: var(--other);
+    border-radius: 14px;
+    padding: 9px 13px;
+    position: relative;
+  }
+  .row.mine .bubble { background: var(--me); }
+  .bubble .meta { font-size: 12px; color: var(--muted); margin-bottom: 3px; }
+  .bubble .meta b { color: var(--text); }
+  .bubble .text { font-size: 15px; white-space: pre-wrap; word-break: break-word; line-height: 1.35; }
+  .bubble .time { font-size: 11px; color: var(--muted); margin-top: 4px; text-align: right; }
+  .file {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 9px 11px;
+    margin-top: 4px;
+  }
+  .file .ico { font-size: 20px; }
+  .file .info { flex: 1; min-width: 0; }
+  .file .name { font-size: 14px; word-break: break-all; }
+  .file .size { font-size: 12px; color: var(--muted); }
+  .file .dl {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 11px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .del {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 13px;
+    opacity: 0;
+    transition: opacity .15s;
+  }
+  .bubble:hover .del { opacity: 1; }
+  .del:hover { color: var(--danger); }
+  .day-sep {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin: 6px 0;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    background: var(--panel);
+    padding: 12px 16px;
+  }
+  .attach-preview {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .attach-preview .x {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 16px;
+  }
+  .composer { display: flex; align-items: flex-end; gap: 10px; }
+  .icon-btn {
+    background: var(--panel2);
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-radius: 10px;
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+    flex: 0 0 auto;
+  }
+  .icon-btn:hover { border-color: var(--accent); }
+  #composer-text {
+    resize: none;
+    min-height: 46px;
+    max-height: 140px;
+    padding: 12px 14px;
+    line-height: 1.35;
+  }
+  .send {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    height: 46px;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 600;
+    flex: 0 0 auto;
+  }
+  .send:disabled { opacity: .5; cursor: default; }
+  .hint { color: var(--muted); font-size: 11px; margin-top: 6px; }
+  .center-note { color: var(--muted); text-align: center; margin-top: 40px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+  <!-- ====================== LOGIN ====================== -->
+  <div id="login">
+    <div class="card">
+      <h1 class="brand">Platforma Scoala</h1>
+      <p class="brand-sub">Intră cu contul tău</p>
+
+      <div id="login-form">
+        <div class="field-label">E-mail</div>
+        <input id="email" type="email" autocomplete="username" placeholder="nume@scoala.ro" />
+        <div class="field-label">Parolă</div>
+        <input id="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+        <button id="login-btn" class="btn">Intră</button>
+        <div id="login-error" class="msg-error"></div>
+      </div>
+
+      <!-- la prima intrare, cerem numele afișat -->
+      <div id="name-form" class="hidden">
+        <div class="field-label">Cum te numești? (apare la mesajele tale)</div>
+        <input id="display-name" type="text" placeholder="Ex: Maria Popescu" />
+        <button id="name-btn" class="btn">Continuă</button>
+        <div id="name-error" class="msg-error"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================== APP ====================== -->
+  <div id="app" class="hidden">
+    <header>
+      <div>
+        <div class="title">Platforma Scoala</div>
+        <div class="channel"># general — toți colegii</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="who" id="who"></div>
+      <button id="logout-btn" class="link-btn">Ieșire</button>
+    </header>
+
+    <div id="messages">
+      <div class="center-note" id="loading-note">Se încarcă mesajele…</div>
+    </div>
+
+    <footer>
+      <div class="attach-preview" id="attach-preview">
+        <span>📎</span>
+        <span id="attach-name"></span>
+        <button class="x" id="attach-remove" title="Scoate fișierul">✕</button>
+      </div>
+      <div class="composer">
+        <input type="file" id="file-input" class="hidden" />
+        <button class="icon-btn" id="attach-btn" title="Atașează un fișier">📎</button>
+        <textarea id="composer-text" placeholder="Scrie un mesaj…"></textarea>
+        <button class="send" id="send-btn">Trimite</button>
+      </div>
+      <div class="hint">Enter = trimite · Shift+Enter = rând nou · fișiere până la 700 KB (cele mari le activăm mai târziu)</div>
+    </footer>
+  </div>
+
+  <!-- Firebase (compat, încărcat de pe serverele Google) -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+  <script>
+  // ============================================================
+  //  CONFIGURARE
+  // ============================================================
+  const firebaseConfig = {
+    apiKey: "AIzaSyA8mFN_Lr5ouYaasGBBx7apPBNGZJFnZNM",
+    authDomain: "proiect-interfata-scolara.firebaseapp.com",
+    projectId: "proiect-interfata-scolara",
+    storageBucket: "proiect-interfata-scolara.firebasestorage.app",
+    messagingSenderId: "472604429439",
+    appId: "1:472604429439:web:d135532decc771317f434a"
+  };
+
+  // Emailurile cu drept de administrator (pot șterge orice mesaj).
+  // Se completează când creăm conturile.
+  const ADMIN_EMAILS = [
+    "grama.razvan95@gmail.com",
+  ];
+
+  const MAX_FILE_BYTES = 700 * 1024; // 700 KB
+
+  // ============================================================
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
+  // ---- elemente ----
+  const el = (id) => document.getElementById(id);
+  const loginView = el('login');
+  const appView = el('app');
+  const loginForm = el('login-form');
+  const nameForm = el('name-form');
+
+  let currentUser = null;
+  let currentName = null;
+  let unsubscribeMessages = null;
+  let pendingFile = null; // { name, type, size, dataUrl }
+
+  function isAdmin(email) {
+    return ADMIN_EMAILS.map(e => e.toLowerCase()).includes((email || '').toLowerCase());
+  }
+
+  // ============================================================
+  //  LOGIN
+  // ============================================================
+  el('login-btn').addEventListener('click', doLogin);
+  el('password').addEventListener('keydown', (e) => { if (e.key === 'Enter') doLogin(); });
+
+  async function doLogin() {
+    const email = el('email').value.trim();
+    const pass = el('password').value;
+    const errBox = el('login-error');
+    errBox.textContent = '';
+    if (!email || !pass) { errBox.textContent = 'Completează e-mailul și parola.'; return; }
+    el('login-btn').disabled = true;
+    try {
+      await auth.signInWithEmailAndPassword(email, pass);
+    } catch (e) {
+      errBox.textContent = translateAuthError(e.code);
+    } finally {
+      el('login-btn').disabled = false;
+    }
+  }
+
+  function translateAuthError(code) {
+    switch (code) {
+      case 'auth/invalid-email': return 'Adresa de e-mail nu este validă.';
+      case 'auth/user-disabled': return 'Acest cont a fost dezactivat.';
+      case 'auth/user-not-found':
+      case 'auth/wrong-password':
+      case 'auth/invalid-credential': return 'E-mail sau parolă greșite.';
+      case 'auth/too-many-requests': return 'Prea multe încercări. Așteaptă puțin și reîncearcă.';
+      case 'auth/network-request-failed': return 'Fără conexiune la internet.';
+      default: return 'Nu am putut autentifica. Încearcă din nou.';
+    }
+  }
+
+  // nume la prima intrare
+  el('name-btn').addEventListener('click', saveName);
+  el('display-name').addEventListener('keydown', (e) => { if (e.key === 'Enter') saveName(); });
+
+  async function saveName() {
+    const name = el('display-name').value.trim();
+    const errBox = el('name-error');
+    errBox.textContent = '';
+    if (name.length < 2) { errBox.textContent = 'Scrie un nume (minim 2 litere).'; return; }
+    el('name-btn').disabled = true;
+    try {
+      await db.collection('users').doc(currentUser.uid).set({
+        displayName: name,
+        email: currentUser.email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+      currentName = name;
+      enterApp();
+    } catch (e) {
+      errBox.textContent = 'Nu am putut salva numele. Încearcă din nou.';
+    } finally {
+      el('name-btn').disabled = false;
+    }
+  }
+
+  // ============================================================
+  //  STARE AUTENTIFICARE
+  // ============================================================
+  auth.onAuthStateChanged(async (user) => {
+    currentUser = user;
+    if (!user) {
+      // delogat -> arată login
+      if (unsubscribeMessages) { unsubscribeMessages(); unsubscribeMessages = null; }
+      appView.classList.add('hidden');
+      loginView.classList.remove('hidden');
+      loginForm.classList.remove('hidden');
+      nameForm.classList.add('hidden');
+      el('password').value = '';
+      return;
+    }
+    // logat -> verifică dacă are nume salvat
+    try {
+      const doc = await db.collection('users').doc(user.uid).get();
+      if (doc.exists && doc.data().displayName) {
+        currentName = doc.data().displayName;
+        enterApp();
+      } else {
+        // cere numele
+        loginView.classList.remove('hidden');
+        appView.classList.add('hidden');
+        loginForm.classList.add('hidden');
+        nameForm.classList.remove('hidden');
+        el('display-name').focus();
+      }
+    } catch (e) {
+      // dacă nu putem citi (ex. reguli), intrăm oricum cu emailul ca nume
+      currentName = user.email;
+      enterApp();
+    }
+  });
+
+  el('logout-btn').addEventListener('click', () => auth.signOut());
+
+  // ============================================================
+  //  APLICAȚIE (chat)
+  // ============================================================
+  function enterApp() {
+    loginView.classList.add('hidden');
+    appView.classList.remove('hidden');
+    const admin = isAdmin(currentUser.email);
+    el('who').innerHTML = 'Conectat ca <b>' + escapeHtml(currentName) + '</b>' +
+      (admin ? '<span class="badge">admin</span>' : '');
+    listenMessages();
+  }
+
+  function listenMessages() {
+    if (unsubscribeMessages) unsubscribeMessages();
+    unsubscribeMessages = db.collection('messages')
+      .orderBy('createdAt', 'asc')
+      .limitToLast(300)
+      .onSnapshot((snap) => {
+        renderMessages(snap.docs);
+      }, (err) => {
+        el('messages').innerHTML =
+          '<div class="center-note">Nu pot citi mesajele.<br>Verifică regulile de securitate.<br><small>' +
+          escapeHtml(err.message) + '</small></div>';
+      });
+  }
+
+  function renderMessages(docs) {
+    const box = el('messages');
+    const nearBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 120;
+    box.innerHTML = '';
+    if (docs.length === 0) {
+      box.innerHTML = '<div class="center-note">Încă niciun mesaj. Scrie primul! 👋</div>';
+      return;
+    }
+    const admin = isAdmin(currentUser.email);
+    let lastDay = '';
+    docs.forEach((d) => {
+      const m = d.data();
+      const ts = m.createdAt && m.createdAt.toDate ? m.createdAt.toDate() : new Date();
+      const dayLabel = ts.toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' });
+      if (dayLabel !== lastDay) {
+        lastDay = dayLabel;
+        const sep = document.createElement('div');
+        sep.className = 'day-sep';
+        sep.textContent = dayLabel;
+        box.appendChild(sep);
+      }
+
+      const mine = m.uid === currentUser.uid;
+      const row = document.createElement('div');
+      row.className = 'row' + (mine ? ' mine' : '');
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.innerHTML = '<b>' + escapeHtml(m.displayName || 'Cineva') + '</b>';
+      bubble.appendChild(meta);
+
+      if (m.type === 'file' && m.fileData) {
+        bubble.appendChild(buildFileEl(m));
+        if (m.text) {
+          const t = document.createElement('div');
+          t.className = 'text';
+          t.textContent = m.text;
+          t.style.marginTop = '6px';
+          bubble.appendChild(t);
+        }
+      } else {
+        const t = document.createElement('div');
+        t.className = 'text';
+        t.textContent = m.text || '';
+        bubble.appendChild(t);
+      }
+
+      const time = document.createElement('div');
+      time.className = 'time';
+      time.textContent = ts.toLocaleTimeString('ro-RO', { hour: '2-digit', minute: '2-digit' });
+      bubble.appendChild(time);
+
+      if (mine || admin) {
+        const del = document.createElement('button');
+        del.className = 'del';
+        del.textContent = '🗑';
+        del.title = 'Șterge mesajul';
+        del.addEventListener('click', () => deleteMessage(d.id));
+        bubble.appendChild(del);
+      }
+
+      row.appendChild(bubble);
+      box.appendChild(row);
+    });
+
+    if (nearBottom) box.scrollTop = box.scrollHeight;
+  }
+
+  function buildFileEl(m) {
+    const wrap = document.createElement('div');
+    wrap.className = 'file';
+    wrap.innerHTML =
+      '<div class="ico">📄</div>' +
+      '<div class="info"><div class="name">' + escapeHtml(m.fileName) + '</div>' +
+      '<div class="size">' + formatSize(m.fileSize || 0) + '</div></div>';
+    const btn = document.createElement('button');
+    btn.className = 'dl';
+    btn.textContent = 'Descarcă';
+    btn.addEventListener('click', () => downloadFile(m));
+    wrap.appendChild(btn);
+    return wrap;
+  }
+
+  function downloadFile(m) {
+    const a = document.createElement('a');
+    a.href = m.fileData; // data URL
+    a.download = m.fileName || 'fisier';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  async function deleteMessage(id) {
+    try {
+      await db.collection('messages').doc(id).delete();
+    } catch (e) {
+      alert('Nu am putut șterge mesajul.');
+    }
+  }
+
+  // ---------- trimitere ----------
+  const textArea = el('composer-text');
+  textArea.addEventListener('input', autoGrow);
+  textArea.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  });
+  function autoGrow() {
+    textArea.style.height = 'auto';
+    textArea.style.height = Math.min(textArea.scrollHeight, 140) + 'px';
+  }
+
+  el('send-btn').addEventListener('click', sendMessage);
+
+  async function sendMessage() {
+    const text = textArea.value.trim();
+    if (!text && !pendingFile) return;
+
+    const base = {
+      uid: currentUser.uid,
+      displayName: currentName,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    let payload;
+    if (pendingFile) {
+      payload = Object.assign(base, {
+        type: 'file',
+        text: text || '',
+        fileName: pendingFile.name,
+        fileType: pendingFile.type,
+        fileSize: pendingFile.size,
+        fileData: pendingFile.dataUrl
+      });
+    } else {
+      payload = Object.assign(base, { type: 'text', text: text });
+    }
+
+    el('send-btn').disabled = true;
+    try {
+      await db.collection('messages').add(payload);
+      textArea.value = '';
+      autoGrow();
+      clearAttachment();
+    } catch (e) {
+      alert('Nu am putut trimite mesajul. Verifică internetul și reîncearcă.');
+    } finally {
+      el('send-btn').disabled = false;
+      textArea.focus();
+    }
+  }
+
+  // ---------- atașare fișier ----------
+  el('attach-btn').addEventListener('click', () => el('file-input').click());
+  el('attach-remove').addEventListener('click', clearAttachment);
+  el('file-input').addEventListener('change', (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    if (f.size > MAX_FILE_BYTES) {
+      alert('Fișierul e prea mare (' + formatSize(f.size) + ').\n' +
+            'Deocamdată se pot trimite fișiere până la 700 KB.\n' +
+            'Fișierele mari le activăm când pornim stocarea extinsă.');
+      el('file-input').value = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      pendingFile = { name: f.name, type: f.type || 'application/octet-stream', size: f.size, dataUrl: reader.result };
+      el('attach-name').textContent = f.name + '  (' + formatSize(f.size) + ')';
+      el('attach-preview').style.display = 'flex';
+    };
+    reader.readAsDataURL(f);
+    el('file-input').value = '';
+  });
+
+  function clearAttachment() {
+    pendingFile = null;
+    el('attach-preview').style.display = 'none';
+    el('attach-name').textContent = '';
+  }
+
+  // ---------- utilitare ----------
+  function escapeHtml(s) {
+    return (s || '').replace(/[&<>"']/g, (c) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
+    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+  }
+  </script>
+</body>
+</html>

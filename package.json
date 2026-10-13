@@ -1,0 +1,35 @@
+{
+  "name": "platforma-scoala",
+  "version": "1.0.0",
+  "description": "Platforma internă a școlii - chat și fișiere",
+  "main": "main.js",
+  "author": "Scoala",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "33.2.1",
+    "electron-builder": "25.1.8"
+  },
+  "build": {
+    "appId": "ro.scoala.platforma",
+    "productName": "Platforma Scoala",
+    "files": [
+      "main.js",
+      "index.html",
+      "build/icon.png"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Platforma Scoala"
+    }
+  }
+}

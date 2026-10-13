@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Emailurile administratorilor (pot șterge orice mesaj).
+    // Se completează cu adresele reale când creăm conturile.
+    function isAdmin() {
+      return signedIn() && request.auth.token.email in [
+        'grama.razvan95@gmail.com'
+      ];
+    }
+
+    // Profilurile utilizatorilor (nume afișat)
+    match /users/{uid} {
+      allow read: if signedIn();
+      allow create, update: if signedIn() && request.auth.uid == uid;
+      allow delete: if false;
+    }
+
+    // Mesajele din chat-ul comun
+    match /messages/{id} {
+      allow read: if signedIn();
+      // poți crea doar mesaje în numele tău
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      // nu se editează mesajele
+      allow update: if false;
+      // ștergi doar mesajele tale; administratorii pot șterge orice
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+    }
+  }
+}
