@@ -37,5 +37,13 @@ service cloud.firestore {
       allow read: if signedIn();
       allow write: if signedIn() && request.auth.uid == uid;
     }
+
+    // Task-uri „De făcut" — comune; oricine autentificat le vede și le bifează
+    match /tasks/{id} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.resource.data.createdBy == request.auth.uid;
+      allow update: if signedIn();
+      allow delete: if signedIn() && (resource.data.createdBy == request.auth.uid || isAdmin());
+    }
   }
 }
