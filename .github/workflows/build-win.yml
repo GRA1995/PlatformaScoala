@@ -1,0 +1,24 @@
+name: Construieste Windows
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Instaleaza dependinte
+        run: npm install
+      - name: Construieste instalerul
+        run: npm run dist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PlatformaScoala-Windows
+          path: dist/*.exe
