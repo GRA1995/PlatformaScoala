@@ -1,6 +1,6 @@
 {
   "name": "platforma-scoala",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Platforma internă a școlii - chat și fișiere",
   "main": "main.js",
   "author": "Scoala",

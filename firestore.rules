@@ -31,5 +31,11 @@ service cloud.firestore {
       // ștergi doar mesajele tale; administratorii pot șterge orice
       allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
     }
+
+    // Prezența (cine e online) — fiecare își scrie doar propriul status
+    match /presence/{uid} {
+      allow read: if signedIn();
+      allow write: if signedIn() && request.auth.uid == uid;
+    }
   }
 }
